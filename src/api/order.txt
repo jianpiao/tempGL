@@ -1,0 +1,1324 @@
+
+
+
+统计接口:
+http://12.10.60.222/GL_Commercial_Street/public/index.php/shopping/Shopmanagement/
+
+某天营业情况:
+接口名:TodayStatistics
+POST:
+[date]:日期(可选，不提交则取今天时间)【格式:2017-12-19】
+返回:
+error:错误，当他大于0时代表错误
+data: 返回的数据
+ shop_flow	        :今天订单数
+ number_of_goods	:今天卖出商品是数量
+ basic_price            :基本收入
+ takeout_fee            :外卖费收入
+ packing_fee            :打包费收入
+ turnover	        :总营业额（要除以100才是真正营业额）
+ date	                :今天日期
+
+
+
+菜品某天销售情况:
+接口名:GoodsTodayStatistics
+POST:
+[date]:日期(可选，不提交则取今天时间)【格式:2017-12-19】
+返回:
+error:错误，当他大于0时代表错误
+data: 返回的数据
+ goods_id	:菜品ID
+ goods_flow	:菜品销量
+ date		:记录日期
+
+
+
+每星期的营业情况:
+接口名:WeekStatistics
+POST:
+[previous]:1-上一个星期营业情况，2-上两个星期营业情况，如此类推
+返回:
+error:错误，当他大于0时代表错误
+data: 返回的数据
+ shop_flow	       :7天里的订单数
+ number_of_goods       :今天卖出商品是数量
+ basic_price           :7天里的基本收入
+ takeout_fee           :7天里的外卖费收入
+ packing_fee           :7天里的打包费收入
+ turnover	       :营业额（要除以100才是真正营业）
+ details               :细节，会罗列出每天营业情款（可以根据此数据绘图）	
+  0	
+  shop_flow	        日销订单数
+  number_of_goods	日销售量
+  basic_price           基本收入
+  takeout_fee           外卖费收入
+  packing_fee           打包费收入
+  turnover	        总营业额
+  date	                记录日期
+
+
+
+菜品过去7天销售情况:
+接口名:GoodsWeekStatistics
+POST:
+goods_id: 菜品ID,测试时写1
+返回:
+error:错误，当他大于0时代表错误
+data: 返回的数据	
+ goods_flow	:改商品的销售量
+ details	:细节（可以根据此数据绘图）
+  0	
+  goods_id	:菜品ID
+  goods_flow	:菜品当天的销售量
+  date	:日期
+  1	
+  goods_id	1
+  goods_flow	12
+  date	"2017-12-06 00:00:00"
+
+
+
+月营业额:
+接口名:MonthlyTurnover
+POST:
+year: 年份
+month: 月份
+返回:
+error:错误，当他大于0时代表错误
+data: 返回的数据	
+ shop_flow	        :这个月订单数
+ number_of_goods	:这个月卖出商品是数量
+ turnover	        :这个月营业额（要除以100才是真正营业）
+ details                :细节，会罗列出每天营业情款（可以根据此数据绘图）
+  0	
+  shop_flow	        日销订单数
+  number_of_goods	日销售量
+  basic_price           基本收入
+  takeout_fee           外卖费收入
+  packing_fee           打包费收入
+  turnover	        总营业额
+  date	                记录日期
+
+
+
+取店铺信息:
+接口名:GetShop
+error	：错误，当他大于0时代表错误
+data:
+ shop_id	:店铺ID
+ shop_category_id	:店铺分类ID
+ shop_category_name	:店铺分类名
+ shop_name	:店铺名字
+ shop_image	:店铺LOGO
+ back_image	:店铺背景图片
+ synopsis	:店铺简介
+ address	:店铺地址
+ packing_fee	:打包费
+ takeout_fee	:外卖费
+ expiration_date	:店铺到期日期
+ shop_state	:店铺状态（0-关闭状态，1-营业状态）  business_hours_start:开店时间（08:00）
+ business_hours_end:关店时间（20:00）
+ tabletop_order:桌面点餐开关:0-关闭，1-开启
+ reserve_order:预定点餐:0-关闭,1-开启
+ online_order:线上点餐:0-关闭,1-开启
+ reception_order:前台点餐:0-关闭,1-开启
+ wx_payment_code:支付二维码
+
+
+商品ID换商品信息:
+商品ID换商品信息：
+接口名：IDtoGoods
+提交方式：POST
+提交内容：
+goods_id:商品ID
+返回:
+error	：错误，当他大于0时代表错误
+data:
+ goods_id	:商品ID
+ goods_name	:商品名称
+ system_category_id	:分类ID（系统）
+ category_name	:分类（系统）
+ shop_goods_category_id	:分类ID（店铺）
+ goods_price	:分类名称（店铺）
+ goods_image	:商品图片地址
+ goods_details   :商品详情
+ goods_type      :商品类型
+ recommend       :推荐：0-非推荐菜色，1-推荐菜色
+  0	
+  goods_id	        :商品ID
+  goods_type_id	        :品类ID
+  goods_type_name	:品类名
+  goods_type_price	:品类价格
+ roll_image      :轮播图
+  0	
+  goods_id	        :商品ID
+  goods_roll_id	        :轮播图
+  goods_roll_image	:轮播图URL
+  goods_roll_synopsis	:轮播图简介
+
+
+
+获取商铺分类列表：
+接口名：ShopCategoryList
+提交方式：GET
+提交内容：[无]
+返回：	
+
+
+
+获取商品(系统)分类列表：
+接口名：GoodsSystemCategoryList
+提交方式：GET
+提交内容：[无]
+返回：	
+
+
+
+获取商品(店家自定义分类)分类列表：
+接口名：ShopGoodsCategoryList
+提交方式：GET
+提交内容：[无]
+返回：
+
+
+
+店铺商品列表：
+
+接口名：GetGoodsList
+
+提交方式：GET
+提交内容：[无]
+返回:
+error	：错误，当他大于0时代表错误
+data:
+ goods_id	:商品ID
+
+ goods_name	:商品名称
+
+ system_category_id	:分类ID（系统）
+
+ category_name	:分类（系统）
+
+ shop_goods_category_id	:分类ID（店铺）
+
+ goods_price	:分类名称（店铺）
+
+ goods_image	:商品图片地址
+
+ recommend: 推荐：0-非推荐菜色，1-推荐菜色
+
+
+
+上传商品轮播图:
+接口名: UpRollImage
+提交方式: POST
+提交内容:
+image:图片数据（具体上传方式请看事例）
+synopsis : 图片介绍
+返回:
+error	:错误，当他大于0时代表错误
+data:   :图片ID（用于商品信息提交）
+
+
+
+删除商品轮播图:
+接口名: DeleteRollImage
+提交方式: POST
+goods_roll_id: 轮播图ID
+提交内容:
+image:图片数据（具体上传方式请看事例）
+返回:
+error	:错误，当他大于0时代表错误
+data:   :
+
+
+
+
+设置商品信息:
+接口名: SetGoodsInfo
+提交方式: POST
+提交内容:
+goods_id                :商品ID（0-代表创建新商品，大于0代表修改已存在的商品信息）
+goods_name              :商品名称
+system_category_id      :系统分类ID（通过GoodsSystemCategoryList，获得系统分类列表）
+shop_goods_category_id  :分类ID（店铺自定义的分类ID，可以通过ShopGoodsCategoryList接口获得选择列表）
+goods_price             :商品价格
+goods_details           :商品详情
+goods_image             :商品图片（通过UpGoodsImage接口返回）
+goods_roll_image        :轮播图组 (通过UpRollImage，返回成员)，JSON.stringify({{'goods_roll_id':1},{'goods_roll_id':2}});
+goods_type              :商品品类设置，JSON.stringify({{'goods_type_id':1,'goods_type_name':'大杯','goods_type_price':1000},{'goods_type_id':2,'goods_type_name':'小杯','goods_type_price':1100}})
+goods_state             :1-下架状态，2-上架状态
+返回:
+error	:错误，当他大于0时代表错误
+data:   :商品ID
+
+
+
+待处理订单:
+接口名: GetOrderList1
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data:
+ 0
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+今天已处理订单:
+接口名: GetOrderList2
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data:
+ 0
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+搜索历史订单:
+接口名：SearchOrder
+提交方式: POST
+提交内容:
+type:搜索类型（1-订单号，2-日期(2017-12-11),3-手机号码,4-微信昵称）
+value:搜索值
+返回:
+error	:错误，当他大于0时代表错误
+data:
+ 0
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+接受订单:
+接口名: ConfirmOrder
+提交方式: POST
+提交内容:
+order_id: 订单ID
+返回:
+error	:错误，当他大于0时代表错误
+data: OK 或 NO
+
+
+今天订单数据:
+接口名: GetOrderNumber
+提交方式: POST
+提交内容:
+order_id: 订单ID
+返回:
+error	:错误，当他大于0时代表错误
+data: 
+ new	:新订单数
+ retreat	:待退单数
+ already_processed	:已完成
+
+
+
+出货:
+接口名: Shipment
+提交方式: POST
+提交内容:
+order_id: 订单ID
+返回:
+error	:错误，当他大于0时代表错误
+data: OK 或 NO
+
+
+
+接受退单:
+接口名: ConfirmBack
+提交方式: POST
+提交内容:
+order_id: 订单ID
+返回:
+error	:错误，当他大于0时代表错误
+data: OK 或 NO
+
+
+
+更新商品状态（商品状态取反，1转2,2转1）:
+接口名: UpGoodsState
+提交方式: POST
+提交内容:
+goods_id: 商品ID
+返回:
+error	:错误，当他大于0时代表错误
+data    :error==0时，返回的是商品状态：1-下架状态，2-上架状态
+
+
+搜索用户:
+接口名: SearchUser
+提交方式: POST
+提交内容:
+type: 搜索类型:1-账号名,2-手机号码,3-电子邮件
+value:搜索值- account_id:用户ID
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ 0
+ account_id  :用户ID
+ account_name:用户账号名字
+ phone_number:手机号码
+ email       :电子邮件
+ real_name   :真实姓名
+
+
+设置用户在本店铺的权限:
+接口名: SetUserAuthority
+提交方式: POST
+提交内容:
+account_id: 用户ID
+authority_value:权限:JSON.stringify({1,2,3,4,5})——1-订单管理,2-店铺信息管理,3-商品管理,4-统计管理,5-子管理员管理
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+
+
+待退订单:
+接口名: GetOrderList2
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ 0
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+已处理订单:
+接口名: GetOrderList3
+提交方式: POST
+提交内容:
+page: 页码（默认请提交-1）
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ e_page_number:每页数据条数
+ page:当前页码
+ PageCount:页数
+ data:
+  0
+  order_id:订单ID
+  shop_id:店铺ID
+  shop_name:店铺名称
+  shop_every_id:店铺订单编号
+  order_number:系统订单编号
+  user_name:用户名
+  phone_number:手机号码
+  order_information:订单信息(要格式化成JSON处理)
+  basic_price:基本金额
+  takeout_fee:外卖费
+  order_price:订单价格
+  address:配送地址
+  date:下单日期
+  order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+  take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+  travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+  payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+  order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+
+
+退出登陆:
+接口名:Quit
+POST:[无]
+返回:
+error: 大于0时代表错误
+data:
+
+
+
+登陆:
+接口名:Login
+POST:
+account_name: 用户账号
+account_pass: 用户密码
+返回:
+error: 大于0时代表错误
+data:
+ session_id: session的ID
+ authority_info:
+  account_id: 用户ID
+  account_name: 账号名
+  real_name: 真实姓名
+  authority: 
+   0
+   shop_id: 店铺ID
+   shop_name: 店铺名称
+   authority: 权限表（[1,2,3,4,5]——权限值:1-订单管理,2-店铺信息管理,3-商品管理,4-统计管理,5-子管理员管理
+
+
+
+
+获取用户信息:
+接口名:GetUserInfo
+POST:[无]
+返回:
+error: 大于0时代表错误
+data:
+ account_id: 账号ID
+ account_name: 账号名
+ real_name: 真实姓名
+ email: 电子邮箱
+ phone_number: 手机号码
+ id_number: 身份证号码
+
+
+获取店铺子权限用户列表:
+接口名:GetShopAuthorityList
+POST:[无]
+返回:
+error: 大于0时代表错误
+data:
+
+
+上传商铺LOGO:
+接口名:UpShopLogo
+POST:
+image: base64图片数据
+返回:
+error: 大于0时代表错误
+data: 图片地址
+
+
+上传商铺背景:
+接口名:UpShopBackImage
+POST:
+image: base64图片数据
+返回:
+error: 大于0时代表错误
+data: 图片地址
+
+
+
+
+
+获取可选择地址(给设置店铺地址的时候使用):
+接口名:GetSelectAddress
+POST:[无]
+返回:
+error: 大于0时代表错误
+data: 
+ 0
+ select_id: 可选地址ID
+ former_stage: 父地址ID
+ address_name: 地址名称
+ after：
+  select_id: 可选地址ID
+  former_stage: 父地址ID
+  address_name: 地址名称
+
+
+设置店铺信息:
+接口名:SetShopInfo
+POST:
+[shop_category_id]: 店铺分类ID（修改店铺分类）
+[shop_name]:   店铺名称
+[synopsis]:    店铺简介
+[takeout_fee]: 外卖费
+[packing_fee]: 打包费
+[address]:     商铺地址
+[shop_state]:  店铺状态：0-关闭状态，1-营业状态
+[tabletop_order]:桌面点餐开关:0-关闭，1-开启
+[reserve_order]:预定点餐:0-关闭,1-开启
+[online_order]:线上点餐:0-关闭,1-开启
+[reception_order]:前台点餐:0-关闭,1-开启
+[business_hours_start]:开店时间（08:00）
+[business_hours_end]:关店时间（20:00
+返回:
+error: 大于0时代表错误
+data: 
+
+
+意见反馈:
+接口名:Feedback
+POST:
+outline：概要
+feedback_info：反馈信息
+error_img: 反馈图片
+返回:
+error: 大于0时代表错误
+
+
+
+
+是否登录:
+接口名:IsLogin
+POST:[无]
+返回:
+error: 大于0时代表错误
+data:提示
+
+
+
+
+登陆:
+接口名:Login
+POST:
+account_name: 用户账号
+account_pass: 用户密码
+返回:
+error: 大于0时代表错误
+data:
+ session_id: session的ID
+ authority_info:
+  account_id: 用户ID
+  account_name: 账号名
+  real_name: 真实姓名
+  account_state:账户状态:0-账号被停用,1-待审核,2-正常,3-审核否决
+  authority: 
+   0
+   shop_id: 店铺ID
+   shop_name: 店铺名称
+   authority: 权限表（[1,2,3,4,5]——权限值:1-订单管理,2-店铺信息管理,3-商品管理,4- 统计管理,5-子管理员管理
+
+
+
+店铺某天商品销售情况:
+接口名:GoodsOneDayStatistics
+POST:
+[date]:可选,日期（2018-01-21）
+返回:
+error: 大于0时代表错误
+data: 
+ 0
+ goods_id:商品ID
+ goods_name:商品名
+ number:销售量
+
+
+
+
+ 某年商品销售情况:
+接口名:YearGoodsNumber
+POST:
+year:那一年年
+返回:
+error: 大于0时代表错误
+data: 
+ 0
+ goods_id:商品ID
+ goods_name:商品名
+ number:销售量
+
+
+
+
+
+所有订单列表:
+接口名: GetOrderList4
+提交方式: POST
+提交内容:
+page: 页码（默认请提交-1）
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ e_page_number:每页数据条数
+ page:当前页码
+ PageCount:页数
+ data:
+  0
+  order_id:订单ID
+  shop_id:店铺ID
+  shop_name:店铺名称
+  shop_every_id:店铺订单编号
+  order_number:系统订单编号
+  user_name:用户名
+  phone_number:手机号码
+  order_information:订单信息(要格式化成JSON处理)
+  basic_price:基本金额
+  takeout_fee:外卖费
+  order_price:订单价格
+  address:配送地址
+  date:下单日期
+  order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+  take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+  travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+  payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+  order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+
+更新分类列表(店家自定义分类):
+接口名: UpShopGoodsCategoryList
+提交方式: POST
+提交内容:
+category_list: 格式化成JSON字符串（[{shop_goods_category_id:分类ID-新增时数值为0即可 , shop_goods_category_name: 分类名称}，{shop_goods_category_id: 12 , shop_goods_category_name: 店铺推荐},shop_goods_category_id: 0 , shop_goods_category_name: 【新增名】]）
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+
+
+
+取已退订单列表(只取30天):
+接口名:GetRecededOrderList
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+
+
+
+
+ 商户注册:
+http://12.10.60.222/GL_Commercial_Street/public/index.php/shopping/Registration/
+
+商户注册:
+接口名:Registration
+提交方式: POST
+提交内容:
+account_name:账号名
+account_pass:密码
+phone_number:手机号码
+real_name:真实名字
+id_number:身份证号码
+life_photos:生活照
+photo_positive:身份证正面
+photo_other:身份证反面
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+
+
+上传图片:
+接口名:UpUserImage
+提交方式: POST
+提交内容:
+image:图片
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+
+
+
+获取系统消息:
+接口名:GetMassage
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ message_id:消息ID
+ account_id:用户ID
+ content:消息内容
+ date:消息发布日期
+ state:阅读:0-未阅读，1-已阅读
+
+
+修改用户信息:
+接口名:SetUserInfo
+POST:
+[phone_number]:手机号码【可选】
+[email]:电子邮箱【可选】
+[real_name]:真实姓名【可选】
+[id_number]:身份证号【可选】
+[life_photos]:生活照【可选】
+[id_card_photo_positive]:身份证正面【可选】
+[id_card_photo_other]:身份证反面【可选】
+
+返回:
+error	:大于0代表数据处理错误
+data	:图片地址
+
+
+
+
+获取用户信息:
+接口名:GetUserInfo
+POST:【无】
+返回:
+error	:大于0代表数据处理错误
+data	:
+ account_id:用户ID
+ account_name:账号名
+ phone_number:手机号码
+ email:电子邮箱
+ real_name:真实姓名
+ id_number:身份证号
+ life_photos:生活照
+ id_card_photo_positive:身份证正面
+ id_card_photo_other:身份证反面
+
+
+取最新商户管理软件版本:
+接口名:GetVersion
+提交方式: POST
+提交内容:
+platform:使用平台（目前只有'Android'）
+version:本地当前版本
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ your_version：你的版本信息
+   id:           版本ID（该参数不重要）
+   platform:     运行平台
+   version:      版本号
+   date:         发布日期
+   download_url: 下载地址
+   state:状态:0-不可再用,1-继续可用
+ current_version：最新版本信息
+   id:           版本ID（该参数不重要）
+   platform:     运行平台
+   version:      版本号
+   date:         发布日期
+   download_url: 下载地址
+   state:状态:0-不可再用,1-继续可用
+
+
+
+
+黄焯宇 wo:
+设置收款微信:
+接口名:SetWechatReceivables
+提交方式: POST
+提交内容:
+pass:用户密码
+wx_payment_code:微信支付码（通过扫描商户的支付二维码自动填入）
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+
+提现:
+接口名:Withdrawals
+提交方式: POST
+提交内容:
+pass:用户密码
+money:提现金额（要乘以一百）
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+黄焯宇 wo:
+绑定钱包提现账号:
+接口名:SetWalletWechatUser
+提交方式: POST
+提交内容:
+pass:用户密码
+user_id:微信用户id（这里特指我们系统分配给微信用户的ID，通过扫描小程序身份二维码自动填入）
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+
+
+
+待取餐列表:
+接口名:TakeMealList
+POST:[无]
+返回:
+error:大于0代表错误
+data:
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+待上菜定订单列表:
+接口名: GetServingOrderList
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data:
+ 0
+ order_id:订单ID
+ shop_id:店铺ID
+ shop_name:店铺名称
+ shop_every_id:店铺订单编号
+ order_number:系统订单编号
+ user_name:用户名
+ phone_number:手机号码
+ order_information:订单信息(要格式化成JSON处理)
+ basic_price:基本金额
+ takeout_fee:外卖费
+ order_price:订单价格
+ address:配送地址
+ date:下单日期
+ order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+ take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+ travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收
+ payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+ order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+
+
+
+
+ 待收餐具清零:
+接口名:CollectTablewareZero
+POST:
+list: 订单号列表,JSON.stringify{[{order_id:1},{order_id:2},{order_id:3}, {order_id:4}]}
+返回:
+error: 大于0时代表错误
+data: 
+
+
+店铺取款记录:
+
+接口名:GetWithdrawList
+POST:
+[page]:第几页，不提交默认为第一页
+返回:
+
+error:大于0代表错误
+
+data:
+ e_page_number: 一页有几条
+ page:          当前处于第几页
+ PageCount:     第几条
+ data:
+  0         
+  shop_id:         店铺ID
+  real_name:       提款者
+  money:           提款金额
+  state:           提款状态:1-待审核,2-取款成功,3-审核失败
+  creation_time:   提款时间
+  up_time:         处理时间
+  review_response: 审核回复（文本）
+
+
+
+
+设置商品信息:
+接口名: SetGoodsInfo
+提交方式: POST
+提交内容:
+goods_id                :商品ID（0-代表创建新商品，大于0代表修改已存在的商品信息）
+goods_name              :商品名称
+system_category_id      :系统分类ID（通过GoodsSystemCategoryList，获得系统分类列表）
+shop_goods_category_id  :分类ID（店铺自定义的分类ID，可以通过ShopGoodsCategoryList接 口获得选择列表）
+goods_price             :商品价格
+goods_details           :商品详情
+goods_image             :商品图片（通过UpGoodsImage接口返回）
+goods_roll_image        :轮播图组 (通过UpRollImage，返回成员)，JSON.stringify ({{'goods_roll_id':1},{'goods_roll_id':2}});
+goods_type              :商品品类设置，JSON.stringify ({{'goods_type_id':1,'goods_type_name':'大杯','goods_type_price':1000}, {'goods_type_id':2,'goods_type_name':'小杯','goods_type_price':1100}})
+goods_state             :1-下架状态，2-上架状态
+[associated_goods]      :双拼关联数组（每个成员都是一个商品的ID,例子：[{goods_id:1},{goods_id:2},{goods_id:3},{goods_id:4}]）
+返回:
+error	:错误，当他大于0时代表错误
+data:   :商品ID
+
+
+
+
+
+商品ID换商品信息:
+商品ID换商品信息：
+接口名：IDtoGoods
+提交方式：POST
+提交内容：
+goods_id:商品ID
+返回:
+error	：错误，当他大于0时代表错误
+data:
+ goods_id	:商品ID
+ goods_name	:商品名称
+ system_category_id	:分类ID（系统）
+ category_name	:分类（系统）
+ shop_goods_category_id	:分类ID（店铺）
+ goods_price	:分类名称（店铺）
+ goods_image	:商品图片地址
+ goods_details   :商品详情
+ goods_type      :商品类型
+ associated_goods:双拼商品关联
+  0
+  goods_id:      商品ID 
+  shop_name:     商品名称
+ recommend       :推荐：0-非推荐菜色，1-推荐菜色
+  0	
+  goods_id	        :商品ID
+  goods_type_id	        :品类ID
+  goods_type_name	:品类名
+  goods_type_price	:品类价格
+ roll_image      :轮播图
+  0	
+  goods_id	        :商品ID
+  goods_roll_id	        :轮播图
+  goods_roll_image	:轮播图URL
+  goods_roll_synopsis	:轮播图简介
+
+
+
+
+
+获取商品名列表:
+接口名:GetGoodsName
+提交方式: POST
+提交内容:[无]
+返回:
+error	:错误，当他大于0时代表错误
+data:   :
+ 0
+ goods_id:商品ID
+ goods_name:商品名称
+ goods_price:商品价格
+
+
+
+
+
+ 获取投诉列表:
+
+接口名:GetComplaintList
+POST:[无]
+返回:
+
+error:大于0代表错误
+
+data:
+ complaint_id:         投诉编号
+ user_id:              投诉者ID
+ order_id:             订单ID
+ order_number:         订单号
+ complaint_type_id:    投诉类型编号
+ complaint_type_name:  投诉类型
+ name:                 投诉者名称
+ phone_number:         投诉者电话
+ content:              投诉内容
+
+
+
+ 设置店铺信息（接口更新2018072501）:
+接口名:SetShopInfo
+POST:
+[shop_category_id]: 店铺分类ID（修改店铺分类）
+[shop_name]:   店铺名称
+[synopsis]:    店铺简介
+[takeout_fee]: 外卖费
+[packing_fee]: 打包费
+[address]:     商铺地址
+[shop_state]:  店铺状态：0-关闭状态，1-营业状态
+[tabletop_order]: 桌面点餐开关:0-关闭，1-开启
+[reserve_order]: 预定点餐:0-关闭,1-开启
+[online_order]: 线上点餐:0-关闭,1-开启
+[reception_order]: 前台点餐:0-关闭,1-开启
+[business_hours_start]: 开店时间（08:00）
+[business_hours_end]: 关店时间（20:00)
+[shop_max_daily_sales_switch]: 是否开启商铺的每日最高销售量（0-关闭，1-开启）
+[shop_max_daily_sales]: 每日最高销售量,shop_max_daily_sales_switch=1时有效
+[shop_image]: 店铺Logo(数据流)
+[back_image]: 店铺背景图（数据流）
+返回:
+error: 大于0时代表错误
+data: 
+[shop_info]: 店铺信息（修改成功时返回）
+
+
+
+
+每日不同类型订单销售金额:
+
+接口名:GetEveryDayTypeOrderMoney
+POST:[无]
+返回:
+
+error:大于0代表错误
+
+data:
+ 0	退单
+  number	0
+  price 	0
+ 1	桌上点餐
+  number	0
+  price 	0
+ 2	预定点餐
+  number	0
+  price 	0
+ 3	线上点餐
+  number	0
+  price 	0
+ 4	前台点餐
+  number	0
+  price 	0
+
+
+
+
+  所有订单列表:
+接口名: GetOrderList4
+提交方式: POST
+提交内容:
+page: 页码（默认请提交-1）
+[start_date]:起始日期（必须和[end_date]一起提交）
+[end_date]:结束日期（必须和[start_date]一起提交）
+[type]:订单类型
+[state]:订单状态
+返回:
+error	:错误，当他大于0时代表错误
+data    :
+ e_page_number:每页数据条数
+ page:当前页码
+ data:
+  0
+  order_id:订单ID
+  shop_id:店铺ID
+  shop_name:店铺名称
+  shop_every_id:店铺订单编号
+  order_number:系统订单编号
+  user_name:用户名
+  phone_number:手机号码
+  order_information:订单信息(要格式化成JSON处理)
+  basic_price:基本金额
+  takeout_fee:外卖费
+  order_price:订单价格
+  address:配送地址
+  date:下单日期
+  order_type:订单类型(订单类型:1-桌上点餐,2-预定点餐,3-线上点餐,4-前台点餐)
+  take_data:当order_type=2时，代表取餐时间（在此日期时间前取）
+  travel_position:运输状态:0-待出货,1-出货中,2-运输中,3-配送中,4-已接收,5-已退货
+  payment_status:支付状态:0-未支付,1-线上支付,3-已退款,4-商家结算
+  order_state:订单状态:1-已下单,2-已接单,3-已结单,4-退单中,5-已退单
+
+ 修改密码
+接口名:UpPass
+POST:
+ pass: 旧密码
+ new_pass: 新密码
+返回:
+error:大于0代表错误
+data:提示信息
+
+
+
+
+把系统通知设为已读:
+接口名:SetMassageRead
+POST:
+ message_id: 消息ID
+返回:
+error:大于0代表错误
+data:提示信息
+
+
+//  长连接  心跳包
+const heartCheck = {
+    timeout: 60000,//60ms
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: () => {
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        this.start();
+    },
+    start: () => {
+        let self = this;
+        this.timeoutObj = setTimeout(() => {
+            webSockConnect.send("HeartBeat");
+            self.serverTimeoutObj = setTimeout(() => {
+                //  如果onclose会执行reconnect，
+                //  我们执行ws.close()就行了.如果直接执行reconnect 
+                //  会触发onclose导致重连两次
+                webSockConnect.close();
+            }, self.timeout)
+        }, this.timeout)
+    }
+}
+
+
+接口名:SetPhoneNumber
+POST:
+phone_number: 手机号号码
+返回:
+error: 大于0时代表错误
+data:
+
+
+
+设置商品信息:
+接口名: SetGoodsInfo
+提交方式: POST
+提交内容:
+goods_id                :商品ID（0-代表创建新商品，大于0代表修改已存在的商品信息）
+goods_name              :商品名称
+system_category_id      :系统分类ID（通过GoodsSystemCategoryList，获得系统分类列表）
+shop_goods_category_id  :分类ID（店铺自定义的分类ID，可以通过ShopGoodsCategoryList接口获得选择列表）
+goods_price             :商品价格
+goods_details           :商品详情
+goods_image             :商品图片（通过UpGoodsImage接口返回）
+goods_roll_image        :轮播图组 (通过UpRollImage，返回成员)，JSON.stringify({{'goods_roll_id':1},{'goods_roll_id':2}});
+goods_type              :商品品类设置，JSON.stringify({{'goods_type_id':1,'goods_type_name':'大杯','goods_type_price':1000},{'goods_type_id':2,'goods_type_name':'小 杯','goods_type_price':1100}})
+goods_state             :1-下架状态，2-上架状态
+[associated_goods]      :双拼关联数组（每个成员都是一个商品的ID,例子：[{goods_id:1},{goods_id:2},{goods_id:3},{goods_id:4}]）
+max_daily_sales_switch  :商品每日最高销量开关(0-关闭，1-打开)
+max_daily_sales         :商品每日最高销量
+[additional_goods]      :附加商品，JSON.stringify({{'additional_name':商品名},{'additional_price':价格}});
+返回:
+error	:错误，当他大于0时代表错误
+data:   :商品ID
+
+
+批量上下架:
+接口名:BatchSetGoodsState
+提交方式: POST
+提交内容:
+goods_list: 商品ID列JSON.stringify([12,45,65,78,5])
+state:      1-为下架商品，2-为上架商品
+返回:
+error	:错误，当他大于0时代表错误
+data:   :
+
+
+
+取店铺信息:
+接口名:GetShop
+error	：错误，当他大于0时代表错误
+data:
+ shop_id	:店铺ID
+ shop_category_id	:店铺分类ID
+ shop_category_name	:店铺分类名
+ shop_name	:店铺名字
+ shop_image	:店铺LOGO
+ back_image	:店铺背景图片
+ synopsis	:店铺简介
+ address	:店铺地址
+ packing_fee	:打包费
+ takeout_fee	:外卖费
+ expiration_date	:店铺到期日期
+ shop_state	:店铺状态（0-关闭状态，1-营业状态）  business_hours_start:开店时间（08:00）
+ business_hours_end:关店时间（20:00）
+ tabletop_order:桌面点餐开关:0-关闭，1-开启
+ reserve_order:预定点餐:0-关闭,1-开启
+ online_order:线上点餐:0-关闭,1-开启
+ reception_order:前台点餐:0-关闭,1-开启
+ wx_payment_code:支付二维码
+ free_amount:    免运费金额
+
+
+
+
+ 设置店铺信息:
+接口名:SetShopInfo
+POST:
+[shop_category_id]: 店铺分类ID（修改店铺分类）
+[shop_name]:   店铺名称
+[synopsis]:    店铺简介
+[takeout_fee]: 外卖费
+[packing_fee]: 打包费
+[address]:     商铺地址
+[shop_state]:  店铺状态：0-关闭状态，1-营业状态
+[tabletop_order]: 桌面点餐开关:0-关闭，1-开启
+[reserve_order]: 预定点餐:0-关闭,1-开启
+[online_order]: 线上点餐:0-关闭,1-开启
+[reception_order]: 前台点餐:0-关闭,1-开启
+[business_hours_start]: 开店时间（08:00）
+[business_hours_end]: 关店时间（20:00)
+[shop_max_daily_sales_switch]: 是否开启商铺的每日最高销售量（0-关闭，1-开启）
+[shop_max_daily_sales]: 每日最高销售量,shop_max_daily_sales_switch=1时有效
+[shop_image]: 店铺Logo(数据流)
+[back_image]: 店铺背景图（数据流）
+[phone_number]: 手机号码
+[wx_payment_code]: 收款二维码
+[free_amount]: 免运费金额
+返回:
+error: 大于0时代表错误
+data: 
+[shop_info]: 店铺信息（修改成功时返回）
