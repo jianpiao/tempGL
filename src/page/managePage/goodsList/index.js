@@ -347,7 +347,7 @@ class GoodsManageContainer extends Component {
     selectAll = () => {
         preventDoublePress.reponTime = 100
         let gtemp = this.updonwList()
-        let selectValueTemp = 0
+        let dlength = 0
         if (this.state.selectAllState) {
             gtemp.forEach(e => {
                 e.data.forEach(m => {
@@ -365,12 +365,12 @@ class GoodsManageContainer extends Component {
         
         //  计算全选后的数据长度
         gtemp.forEach(e => {
-            selectValueTemp = e.data.filter(m => m.checkBox).length
+            dlength += e.data.filter(m => m.checkBox).length
         })
         //  改变数据
         this.setState({
             selectAllState: !this.state.selectAllState,
-            selectValue: selectValueTemp
+            selectValue: dlength
         })
     }
     //  设置商品上下架
