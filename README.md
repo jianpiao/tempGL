@@ -1,3 +1,4 @@
+![image](http://image.so.com/z?ch=beauty&t1=595&src=banner_beauty&gid=d6f213442c5904edc4f5b075b3096219)
 # 商业街商户端
 ## 首页
 ### 代收餐具
